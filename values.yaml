@@ -1,0 +1,5 @@
+appName: sample-node-app
+namespace: deneme
+configmap:
+  name: configmap1
+image: yigitfa/sample-node:1.0.6
