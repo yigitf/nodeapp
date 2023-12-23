@@ -1,9 +1,9 @@
 appName: sample-node-app
 image: yigitfa/sample-node:1.0.6
-environment: production
-replicas: 2
-port: 8090
+environment: development
+replicas: 3
+port: 8080
 configmap:
-  name: cm-prod
+  name: cm-dev
 secrets:
-  name: external-secret-prod
+  name: secret-dev
