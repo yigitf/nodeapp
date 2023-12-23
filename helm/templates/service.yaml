@@ -7,7 +7,7 @@ metadata:
     app: {{ .Values.appName}}
 spec:
   ports:
-  - port: 3051
-    targetPort: 3051
+  - port: {{ .Values.port}}
+    targetPort: {{ .Values.port}}
   selector:
     app: {{ .Values.appName}}
