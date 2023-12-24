@@ -9,5 +9,5 @@ secrets:
   name: external-secret-prod
 hpa:
   minreplicas: 1
-  maxteplicas: 7
+  maxreplicas: 7
   cputhreshold: 50
