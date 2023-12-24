@@ -1,5 +1,5 @@
 appName: sample-node-app
-image: yigitfa/sample-node:1.0.7
+image: yigitfa/sample-node:1.0.8
 environment: development
 replicas: 3
 port: 8080
