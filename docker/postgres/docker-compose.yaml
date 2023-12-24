@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: password123
       POSTGRES_DB: appdatabase
     ports:
-      - 2345:5432
+      - 234:5432
     volumes:
       - db:/var/lib/postgres
 volumes: 

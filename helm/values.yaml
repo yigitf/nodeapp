@@ -7,3 +7,7 @@ configmap:
   name: cm-prod
 secrets:
   name: external-secret-prod
+hpa:
+  minreplicas: 1
+  maxteplicas: 7
+  cputhreshold: 50

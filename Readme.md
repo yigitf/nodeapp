@@ -1,11 +1,21 @@
-prerequisities:
+# Node.js - PostgreSQL App with ArgoCD
+
+#### Prerequisites:
 - docker or docker desktop
 - helm
 - minikube
 
-POSTGREQL
+#### Setting the PostgreSQL Database
 
-First, we need a cluster, run the command below to create a single node cluster with minikube.
+Before creating the Kubernetes cluster, our application needs to connect a postgresql db. We can simply create a db with the docker-compose and simple credentials.
+```
+docker-compose -f docker/postgres/docker-compose.yaml up -d
+```
+Now we need to create our database and some data in it. Sample queries for our application specific are provided in "./docker/postgres/food.sql". I used pgAdmin to connect and query to my database. "www.pgadmin.org"
+
+#### Cluster & Environment
+
+After database gets ready for our node api, we need a Kubernetes cluster, run the command below to create a single node cluster with minikube.
 ```
 minikube start
 ```
@@ -29,6 +39,8 @@ The username will be admin, and you should decode the initial admin secret.
 kubectl get secret argocd-initial-admin-secret -n argocd -o yaml
 ```
 We should take the value in "data.password" key and decode it on base64, decoding method depends on your operating system, so it is also safe to use "www.base64decode.org" website. 
+
+#### Deploying & Testing the Application with ArgoCD
 
 Now, all required aspects have been installed to run our helm application with argocd. We can now apply our argocd manifests to build our helm chart on remote git repository.
 ```
