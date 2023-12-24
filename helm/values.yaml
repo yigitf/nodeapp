@@ -7,3 +7,14 @@ configmap:
   name: cm-dev
 secrets:
   name: secret-dev
+resources:
+  requests:
+    memory: "16Mi" 
+    cpu: "50m"
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
+hpa:
+  minreplicas: 1
+  maxreplicas: 7
+  cputhreshold: 50
