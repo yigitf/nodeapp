@@ -1,4 +1,5 @@
-# Node.js - PostgreSQL App with ArgoCD
+# Node.js Application with ArgoCD
+![alt text](diagrams/project-architecture.png)
 
 #### Prerequisites:
 - docker or docker desktop
@@ -56,3 +57,16 @@ kubectl port-forward svc/sample-node-app -n prod 8090:8090
 For checking the api's if they are healthy;
 dev: http://localhost:8080/food
 prod: http://localhost:8090/food
+
+#### ArgoCD Notifications (Bonus!)
+We have a bonus here, notifications! You can install the argocd-notifications with the commands below.
+```
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj-labs/argocd-notifications/release-1.0/manifests/install.yaml
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj-labs/argocd-notifications/release-1.0/catalog/install.yaml
+```
+After installation you should consider and configure your notification channel. I configured myself as Slack. You can reach the documentations here: https://argocd-notifications.readthedocs.io/
+You can use these templates with your api token:
+```
+kubectl apply -f .\notifications\argocd-notifications-secret.yaml
+kubectl apply -f .\notifications\argocd-notifications-cm.yaml
+```

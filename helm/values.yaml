@@ -2,11 +2,18 @@ appName: sample-node-app
 image: yigitfa/sample-node:1.0.6
 environment: production
 replicas: 2
-port: 8090
+port: 8090 # should be the same with environment
 configmap:
   name: cm-prod
 secrets:
   name: external-secret-prod
+resources:
+  requests:
+    memory: "16Mi" 
+    cpu: "50m"
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
 hpa:
   minreplicas: 1
   maxreplicas: 7

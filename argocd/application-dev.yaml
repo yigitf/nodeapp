@@ -3,6 +3,11 @@ kind: Application
 metadata:
   name: nodejs-dev
   namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: alerts
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: alerts
+    notifications.argoproj.io/subscribe.on-deployed.slack: alerts
+    notifications.argoproj.io/subscribe.on-health.degraded: alerts
 spec:
   destination:
     namespace: dev

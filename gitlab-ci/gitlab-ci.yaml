@@ -1,0 +1,44 @@
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  IMAGE_NAME: yigitfa/sample_node
+  IMAGE_TAG: 1.0.8
+  GITHUB_REPO: https://github.com/yigitf/nodeapp.git
+  GITHUB_TOKEN: <github-token>
+
+test:
+  stage: test
+  image: node:latest
+  before_script:
+    - npm install
+    - npm start
+  script:
+    - curl http:/localhost:3000/food 
+
+build:
+  stage: build
+  image: docker:latest
+  before_script:
+    - docker login -u $REGISTRY_USER -p $REGISTRY_PASS
+  script:
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+
+deploy:
+  stage: deploy
+  script:
+    - apt-get update && apt-get install -y git
+    - git config --global user.email "fatihyigit29@hotmail.com"
+    - git config --global user.name "yigitf"
+    - git clone $GITHUB_REPO
+    - cd nodeapp
+    - git checkout prod
+    - sed -i "s|image:.*|image: $IMAGE_NAME:$IMAGE_TAG|g" helm/values.yaml
+    - git add helm/values.yaml
+    - git commit -m "Update image in values.yaml to $IMAGE_NAME:$IMAGE_TAG"
+    - git push origin prod
+  only:
+    - prod
