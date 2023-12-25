@@ -25,6 +25,10 @@ We will use secrets that aws secrets manager provided for production environment
 helm repo add external-secrets https://charts.external-secrets.io
 helm install external-secrets external-secrets/external-secrets -n external-secrets --create-namespace 
 ```
+There is also a Horizontal Pod Autoscaler in this project. It needs monitoring data to take action on the right time. Install the metrics-server with the command below:
+```
+minikube addons enable metrics-server
+```
 ArgoCD will play the main role on this project, so simply install ArgoCD with the commands below.
 ```
 kubectl create namespace argocd
